@@ -14,6 +14,7 @@ import static specs.Specs.*;
 
 @Feature("API тесты для reqres.in")
 @Tag("API")
+@DisplayName("API тесты")
 public class ApiTests {
 
     @Test
