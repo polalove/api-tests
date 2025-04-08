@@ -2,7 +2,6 @@ package tests;
 
 import io.qameta.allure.*;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import models.*;
 
@@ -13,9 +12,8 @@ import static specs.Specs.request;
 import static specs.Specs.*;
 
 @Feature("API тесты для reqres.in")
-@Tag("API")
 @DisplayName("API тесты")
-public class ApiTests {
+public class ApiTests extends TestBase {
 
     @Test
     @DisplayName("Получение информации о пользователе")
@@ -87,9 +85,7 @@ public class ApiTests {
     @Story("Пользовательские операции")
     @Severity(SeverityLevel.BLOCKER)
     void createUserTest() {
-        CreateUserRequest requestBody = new CreateUserRequest();
-        requestBody.setName("morpheus");
-        requestBody.setJob("leader");
+        CreateUserRequest requestBody = new CreateUserRequest("morpheus", "leader");
 
         step("Создать нового пользователя", () -> {
             CreateUserResponse response = given(request)
@@ -123,9 +119,7 @@ public class ApiTests {
     @Story("Пользовательские операции")
     @Severity(SeverityLevel.CRITICAL)
     void updateUserTest() {
-        CreateUserRequest requestBody = new CreateUserRequest();
-        requestBody.setName("morpheus");
-        requestBody.setJob("zion resident");
+        CreateUserRequest requestBody = new CreateUserRequest("morpheus", "zion resident");
 
         step("Обновить информацию о пользователе с id=2", () -> {
             UpdateUserResponse response = given(request)

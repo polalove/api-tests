@@ -16,30 +16,22 @@ public class Specs {
             .log().uri()
             .log().body()
             .log().headers()
-            .contentType(JSON)
-            .baseUri("https://reqres.in")
-            .basePath("/api");
+            .contentType(JSON);
 
-    public static ResponseSpecification response200 = new ResponseSpecBuilder()
-            .log(STATUS)
-            .log(BODY)
-            .expectStatusCode(200)
-            .build();
+    private static ResponseSpecification createResponseSpec(int statusCode, boolean logBody) {
+        ResponseSpecBuilder builder = new ResponseSpecBuilder()
+                .log(STATUS)
+                .expectStatusCode(statusCode);
 
-    public static ResponseSpecification response201 = new ResponseSpecBuilder()
-            .log(STATUS)
-            .log(BODY)
-            .expectStatusCode(201)
-            .build();
+        if (logBody) {
+            builder.log(BODY);
+        }
 
-    public static ResponseSpecification response204 = new ResponseSpecBuilder()
-            .log(STATUS)
-            .expectStatusCode(204)
-            .build();
+        return builder.build();
+    }
 
-    public static ResponseSpecification response404 = new ResponseSpecBuilder()
-            .log(STATUS)
-            .log(BODY)
-            .expectStatusCode(404)
-            .build();
+    public static ResponseSpecification response200 = createResponseSpec(200, true);
+    public static ResponseSpecification response201 = createResponseSpec(201, true);
+    public static ResponseSpecification response204 = createResponseSpec(204, false);
+    public static ResponseSpecification response404 = createResponseSpec(404, true);
 }
