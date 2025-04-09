@@ -37,8 +37,4 @@ allure {
             }
         }
     }
-    task apiTests(type: Test) {
-        useJUnitPlatform {
-        }
-    }
 }
